@@ -19,30 +19,9 @@ body {
     --footer-height: 25px;
     
     font-family: 'Titillium Web', sans-serif;
-    background-color: var(--color2);
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: calc(var(--footer-height));
-}
-
-section {
-    background-color: var(--color5);
-    width: 1000px;
-    max-width: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: var(--gutter);
-    padding-bottom: var(--gutter);
-    margin-top: var(--gutter);
-    margin-bottom: var(--gutter);
-    border: solid 2px var(--color1);
+    background-color: black;
+    background-image: url('../assets/bg.jpeg');
+    background-size: 400px;
 }
 
 header {
@@ -111,3 +90,52 @@ footer {
     }
 
   }
+
+
+main {
+    display: flex;
+    background-color: white;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 800px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.picker {
+    display: flex;
+    flex-direction: column;
+}
+
+.left {
+    overflow: scroll;
+}
+
+.left, .right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.character {
+    display: grid;
+    grid-template-rows: 1.5fr 1fr 2fr;
+    height: 700px;
+    width: 200px;
+}
+
+.bg {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+}
+
+.catchphrase {
+    font-size: 2rem;
+    font-family: cursive;
+    text-align: center;
+}
