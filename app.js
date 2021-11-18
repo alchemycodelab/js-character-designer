@@ -15,7 +15,7 @@ const signUpPassword = document.getElementById('sign-up-password');
 // if user currently logged in, redirect
 redirectToBuild();
 
-signUpForm.addEventListener('submit', async(event)=>{
+signUpForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const user = await signupUser(signUpEmail.value, signUpPassword.value);
 
