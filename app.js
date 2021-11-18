@@ -1,9 +1,7 @@
 import { 
-    createCharacter, 
     redirectToBuild, 
     signInUser, 
     signupUser,
-    getUser
 } from './fetch-utils.js';
 
 const signInForm = document.getElementById('sign-in');
