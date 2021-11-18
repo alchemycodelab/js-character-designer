@@ -4,7 +4,7 @@ import {
     logout, 
     updateCharacter,
     createCharacter,
-} from "../fetch-utils.js";
+} from '../fetch-utils.js';
 
 // import functions and grab DOM elements
 checkAuth();
@@ -35,42 +35,42 @@ let bottom = '';
 
 let catchphrases = [];
 
-headDropdown.addEventListener('change', async () => {
+headDropdown.addEventListener('change', async() => {
     const value = headDropdown.value;
 
     headCount++;
     head = value;
     headEl.style.backgroundImage = `url("../assets/${value}-head.png")`;
-    await updateCharacterInSupabase()
+    await updateCharacterInSupabase();
 });
 
 
-middleDropdown.addEventListener('change', async () => {
+middleDropdown.addEventListener('change', async() => {
     const value = middleDropdown.value;
 
     middleCount++;
     middle = value;
     middleEl.style.backgroundImage = `url("../assets/${value}-middle.png")`;
-    await updateCharacterInSupabase()
+    await updateCharacterInSupabase();
 });
 
 
-bottomDropdown.addEventListener('change', async () => {
+bottomDropdown.addEventListener('change', async() => {
     const value = bottomDropdown.value;
 
     bottomCount++;
     bottom = value;
     bottomEl.style.backgroundImage = `url("../assets/${value}-pants.png")`;
-    await updateCharacterInSupabase()
+    await updateCharacterInSupabase();
 });
 
-catchphraseButton.addEventListener('click', async () => {
+catchphraseButton.addEventListener('click', async() => {
     const newCatchphrase = catchphraseInput.value;
     catchphrases.push(newCatchphrase);
 
     catchphraseInput.value = '';
     
-    await updateCharacterInSupabase()
+    await updateCharacterInSupabase();
     renderUpdate();
 });
 
@@ -118,7 +118,7 @@ window.addEventListener('load', async() => {
     catchphrases = character.catchphrases;
 
     renderUpdate();
-})
+});
 
 async function updateCharacterInSupabase() {
     const newCharacter = {
@@ -128,11 +128,11 @@ async function updateCharacterInSupabase() {
         catchphrases: catchphrases,
     };
 
-    await updateCharacter(newCharacter)
+    await updateCharacter(newCharacter);
 
     renderUpdate();
 }
 
 logoutButton.addEventListener('click', () => {
-    logout()
+    logout();
 });
