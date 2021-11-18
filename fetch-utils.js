@@ -4,14 +4,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export async function createCharacter(character){
-    const { error, data } = await client
+    const response = await client
         .from('characters')
         .insert({ 
             ...character, 
             user_id: client.auth.user().id, 
-        });
+        })
+        .single();
 
-    return error ? console.error(error) : data[0];   
+    return checkError(response)
 }
 
 
