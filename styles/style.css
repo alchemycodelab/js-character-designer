@@ -139,3 +139,25 @@ main {
     font-family: cursive;
     text-align: center;
 }
+
+form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+}
+
+form button {
+    margin: 10px;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+#logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}

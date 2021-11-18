@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <main>
+        <button id=logout>Logout</button>
+        <div class="left">
+            <div class="picker">
+                <label>
+                    Head
+                    <select id="head-dropdown">
+                        <option value="bird">Bird</option>
+                        <option value="duck">Duck</option>
+                        <option value="dog">Dog</option>
+                        <option value="horse">Horse</option>
+                    </select>
+                </label>
+                <label>
+                    Middle
+                    <select id="middle-dropdown">
+                        <option value="blue">Blue</option>
+                        <option value="dress">Fancy</option>
+                        <option value="pink">Pink</option>
+                        <option value="red">Red</option>
+                    </select>
+                </label>
+                <label>
+                    Bottom
+                    <select id="bottom-dropdown">
+                        <option value="leg">Single Leg</option>
+                        <option value="white">White Pants</option>
+                        <option value="blue">Blue Jeans</option>
+                    </select>
+                </label>
+                <label>
+                    Add a catch phrase
+                    <input id="catchphrase-input" />
+                    <button id="catchphrase-button">Add</button>
+                </label>
+            </div>
+            <div id="stats">
+                <p id="report"></p>
+                <div id="chatchphrases">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="character">
+                <div class="bg head" id="head">
+                </div>
+                <div class="bg middle" id="middle">
+                </div>
+                <div class="bg bottom" id="bottom">
+                </div>
+            </div>
+            
+        </div>
+    </main>
+    <script type="module" src="./build.js"></script>
+</body>
+
+</html>
