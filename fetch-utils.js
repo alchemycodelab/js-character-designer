@@ -12,19 +12,76 @@ export async function createCharacter(character){
         })
         .single();
 
-    return checkError(response)
+    return checkError(response);
 }
 
-
-export async function updateCharacter(newCharacter){
+/*
+CHALLENGE: how would you use this function? which functions would it replace? what's going on with the brackets in the update() arguments?
+export async function updateCharacter(part, value){
     const currentUserId = client.auth.user().id;
 
     const response = await client
         .from('characters')
-        .update({
-            ...newCharacter,
-            user_id: currentUserId
-        })
+        .update({ [part]: value })
+        .match({ user_id: currentUserId });
+
+    return checkError(response);    
+}
+*/
+
+export async function updateHead(value){
+    const currentUserId = client.auth.user().id;
+
+    const response = await client
+        .from('characters')
+        .update({ head: value })
+        .match({ user_id: currentUserId });
+
+    return checkError(response);    
+}
+
+
+export async function updateMiddle(value){
+    const currentUserId = client.auth.user().id;
+
+    const response = await client
+        .from('characters')
+        .update({ middle: value })
+        .match({ user_id: currentUserId });
+
+    return checkError(response);    
+}
+
+
+export async function updateBottom(value){
+    const currentUserId = client.auth.user().id;
+
+    const response = await client
+        .from('characters')
+        .update({ bottom: value })
+        .match({ user_id: currentUserId });
+
+    return checkError(response);    
+}
+
+export async function updateChatchphrases(value){
+    const currentUserId = client.auth.user().id;
+
+    const response = await client
+        .from('characters')
+        .update({ catchphrases: value })
+        .match({ user_id: currentUserId });
+
+    return checkError(response);    
+}
+
+
+export async function updateCharacter(part, value){
+    const currentUserId = client.auth.user().id;
+
+    const response = await client
+        .from('characters')
+        .update({ [part]: value })
         .match({ user_id: currentUserId });
 
     return checkError(response);    

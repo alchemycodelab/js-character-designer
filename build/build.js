@@ -4,6 +4,10 @@ import {
     logout, 
     updateCharacter,
     createCharacter,
+    updateBottom,
+    updateHead,
+    updateMiddle,
+    updateChatchphrases
 } from '../fetch-utils.js';
 
 // import functions and grab DOM elements
@@ -29,75 +33,45 @@ const logoutButton = document.getElementById('logout');
 let headCount = 0;
 let middleCount = 0;
 let bottomCount = 0;
-let head = '';
-let middle = '';
-let bottom = '';
 
 let catchphrases = [];
 
 headDropdown.addEventListener('change', async() => {
-    const value = headDropdown.value;
-
     headCount++;
-    head = value;
-    headEl.style.backgroundImage = `url("../assets/${value}-head.png")`;
-    await updateCharacterInSupabase();
+    await updateHead(headDropdown.value);
 });
 
 
 middleDropdown.addEventListener('change', async() => {
-    const value = middleDropdown.value;
-
     middleCount++;
-    middle = value;
-    middleEl.style.backgroundImage = `url("../assets/${value}-middle.png")`;
-    await updateCharacterInSupabase();
+    await updateMiddle(middleDropdown.value);
 });
 
 
 bottomDropdown.addEventListener('change', async() => {
-    const value = bottomDropdown.value;
-
     bottomCount++;
-    bottom = value;
-    bottomEl.style.backgroundImage = `url("../assets/${value}-pants.png")`;
-    await updateCharacterInSupabase();
+    updateBottom(bottomDropdown.value);
 });
 
 catchphraseButton.addEventListener('click', async() => {
-    const newCatchphrase = catchphraseInput.value;
-    catchphrases.push(newCatchphrase);
+    catchphrases.push(catchphraseInput.value);
 
     catchphraseInput.value = '';
     
-    await updateCharacterInSupabase();
-    renderUpdate();
+    updateChatchphrases(catchphrases);
 });
 
-function renderUpdateStats() {
-    reportEl.textContent = `You have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
+async function fetchAndRenderCharacter() {
+    const { head, middle, bottom } = await getCharacter();
 
-    chatchphrasesEl.textContent = '';
-
-    for (let catchphrase of catchphrases) {
-        const p = document.createElement('p');
-
-        p.classList.add('catchphrase');
-        p.textContent = catchphrase;
-
-        chatchphrasesEl.append(p);
-    }
-}
-
-function renderUpdateCharacter() {
     if (head) headEl.style.backgroundImage = `url("../assets/${head}-head.png")`;
     if (middle) middleEl.style.backgroundImage = `url("../assets/${middle}-middle.png")`;
     if (bottom) bottomEl.style.backgroundImage = `url("../assets/${bottom}-pants.png")`;
 }
 
-function renderUpdate() {
-    renderUpdateStats();
-    renderUpdateCharacter();
+function refreshData() {
+    renderStats();
+    fetchAndRenderCharacter();
 }
 
 window.addEventListener('load', async() => {
@@ -112,27 +86,32 @@ window.addEventListener('load', async() => {
         });    
     }
 
-    head = character.head;
-    middle = character.middle;
-    bottom = character.bottom;
     catchphrases = character.catchphrases;
 
-    renderUpdate();
+    refreshData();
 });
 
-async function updateCharacterInSupabase() {
-    const newCharacter = {
-        head: head,
-        middle: middle,
-        bottom: bottom,
-        catchphrases: catchphrases,
-    };
+async function updatePart(part, value) {
+    await updateCharacter(part, value);
 
-    await updateCharacter(newCharacter);
-
-    renderUpdate();
+    refreshData();
 }
 
 logoutButton.addEventListener('click', () => {
     logout();
 });
+
+function renderStats() {
+    reportEl.textContent = `In this session, you have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
+
+    chatchphrasesEl.textContent = '';
+
+    for (let catchphrase of catchphrases) {
+        const p = document.createElement('p');
+
+        p.classList.add('catchphrase');
+        p.textContent = catchphrase;
+
+        chatchphrasesEl.append(p);
+    }
+}
