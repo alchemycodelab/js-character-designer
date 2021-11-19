@@ -2,7 +2,6 @@ import {
     checkAuth, 
     getCharacter,
     logout, 
-    updateCharacter,
     createCharacter,
     updateBottom,
     updateHead,
@@ -30,35 +29,44 @@ const catchphraseInput = document.getElementById('catchphrase-input');
 const catchphraseButton = document.getElementById('catchphrase-button');
 const logoutButton = document.getElementById('logout');
 
+// we're still keeping track of 'this session' clicks, so we keep these lets
 let headCount = 0;
 let middleCount = 0;
 let bottomCount = 0;
 
+// however, we are _not_ keeping track of catchphrases locally. nonetheless, we need this array here. Why is that, do you think?
 let catchphrases = [];
 
 headDropdown.addEventListener('change', async() => {
     headCount++;
+
     await updateHead(headDropdown.value);
+    refreshData();
 });
 
 
 middleDropdown.addEventListener('change', async() => {
     middleCount++;
+    
     await updateMiddle(middleDropdown.value);
+    refreshData();
 });
 
 
 bottomDropdown.addEventListener('change', async() => {
     bottomCount++;
-    updateBottom(bottomDropdown.value);
+    
+    await updateBottom(bottomDropdown.value);
+    refreshData();
 });
 
 catchphraseButton.addEventListener('click', async() => {
     catchphrases.push(catchphraseInput.value);
 
     catchphraseInput.value = '';
-    
-    updateChatchphrases(catchphrases);
+    await updateChatchphrases(catchphrases);
+    refreshData();
+
 });
 
 async function fetchAndRenderCharacter() {
@@ -90,12 +98,6 @@ window.addEventListener('load', async() => {
 
     refreshData();
 });
-
-async function updatePart(part, value) {
-    await updateCharacter(part, value);
-
-    refreshData();
-}
 
 logoutButton.addEventListener('click', () => {
     logout();
