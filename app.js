@@ -28,7 +28,7 @@ headDropdown.addEventListener('change', () => {
 
     headCount++;
     headEl.style.backgroundImage = `url("./assets/${value}-head.png")`;
-    updateStats();
+    displayStats();
 });
 
 
@@ -37,7 +37,7 @@ middleDropdown.addEventListener('change', () => {
 
     middleCount++;
     middleEl.style.backgroundImage = `url("./assets/${value}-middle.png")`;
-    updateStats();
+    displayStats();
 });
 
 
@@ -46,7 +46,7 @@ bottomDropdown.addEventListener('change', () => {
 
     bottomCount++;
     bottomEl.style.backgroundImage = `url("./assets/${value}-pants.png")`;
-    updateStats();
+    displayStats();
 });
 
 catchphraseButton.addEventListener('click', () => {
@@ -54,10 +54,10 @@ catchphraseButton.addEventListener('click', () => {
     catchphrases.push(newCatchphrase);
 
     catchphraseInput.value = '';
-    updateStats();
+    displayStats();
 });
 
-function updateStats() {
+function displayStats() {
     reportEl.textContent = `You have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
 
     chatchphrasesEl.textContent = '';
