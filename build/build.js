@@ -78,7 +78,7 @@ async function fetchAndRenderCharacter() {
 }
 
 function refreshData() {
-    renderStats();
+    displayStats();
     fetchAndRenderCharacter();
 }
 
@@ -103,7 +103,7 @@ logoutButton.addEventListener('click', () => {
     logout();
 });
 
-function renderStats() {
+function displayStats() {
     reportEl.textContent = `In this session, you have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
 
     chatchphrasesEl.textContent = '';
