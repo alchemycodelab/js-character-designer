@@ -69,19 +69,6 @@ catchphraseButton.addEventListener('click', async() => {
 
 });
 
-async function fetchAndRenderCharacter() {
-    const { head, middle, bottom } = await getCharacter();
-
-    if (head) headEl.style.backgroundImage = `url("../assets/${head}-head.png")`;
-    if (middle) middleEl.style.backgroundImage = `url("../assets/${middle}-middle.png")`;
-    if (bottom) bottomEl.style.backgroundImage = `url("../assets/${bottom}-pants.png")`;
-}
-
-function refreshData() {
-    displayStats();
-    fetchAndRenderCharacter();
-}
-
 window.addEventListener('load', async() => {
     let character = await getCharacter();
 
@@ -105,7 +92,9 @@ logoutButton.addEventListener('click', () => {
 
 function displayStats() {
     reportEl.textContent = `In this session, you have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
+}
 
+function displayCatchphrases() {
     chatchphrasesEl.textContent = '';
 
     for (let catchphrase of catchphrases) {
@@ -116,4 +105,19 @@ function displayStats() {
 
         chatchphrasesEl.append(p);
     }
+}
+
+
+async function fetchAndDisplayCharacter() {
+    const { head, middle, bottom } = await getCharacter();
+
+    if (head) headEl.style.backgroundImage = `url("../assets/${head}-head.png")`;
+    if (middle) middleEl.style.backgroundImage = `url("../assets/${middle}-middle.png")`;
+    if (bottom) bottomEl.style.backgroundImage = `url("../assets/${bottom}-pants.png")`;
+}
+
+function refreshData() {
+    displayStats();
+    displayCatchphrases();
+    fetchAndDisplayCharacter();
 }
