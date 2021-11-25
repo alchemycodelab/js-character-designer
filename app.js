@@ -1,11 +1,6 @@
 // import functions and grab DOM elements
+import { createStatsString } from './utils.js';
 
-// initialize state
-
-// set event listeners 
-  // get user input
-  // use user input to update state 
-  // update DOM to reflect the new state
 const headDropdown = document.getElementById('head-dropdown');
 const middleDropdown = document.getElementById('middle-dropdown');
 const bottomDropdown = document.getElementById('bottom-dropdown');
@@ -58,7 +53,9 @@ catchphraseButton.addEventListener('click', () => {
 });
 
 function displayStats() {
-    reportEl.textContent = `You have changed the head ${headCount} times, the body ${middleCount} times, and the pants ${bottomCount} times. And nobody can forget your character's classic catchphrases:`;
+    const statsString = createStatsString(headCount, middleCount, bottomCount);
+    
+    reportEl.textContent = statsString;
 }
 
 function displayCatchphrases() {
